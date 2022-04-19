@@ -11,4 +11,10 @@ ng g c auth/components/registro
 ```
 ng g m auth --routing
 ng g m admin --routing
+ng g m core
+```
+
+## Servicios
+```
+ng g s core/services/login
 ```
