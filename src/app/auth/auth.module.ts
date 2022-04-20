@@ -5,8 +5,9 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { ReactiveFormsModule } from '@angular/forms'
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { CoreModule } from './../core/core.module'
+import { InterceptorInterceptor } from '../interceptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,13 @@ import { CoreModule } from './../core/core.module'
     ReactiveFormsModule,
     HttpClientModule,
     CoreModule
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorInterceptor,
+      multi: true
+    }
   ]
 })
 export class AuthModule { }

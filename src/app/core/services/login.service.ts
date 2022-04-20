@@ -12,4 +12,8 @@ export class LoginService {
     return this.http.post('http://127.0.0.1:8000/api/v1/auth/login', datos);
   }
 
+  getPerfil(){
+    return this.http.get('http://127.0.0.1:8000/api/v1/auth/perfil');
+  }
+
 }

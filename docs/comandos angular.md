@@ -18,3 +18,13 @@ ng g m core
 ```
 ng g s core/services/login
 ```
+
+## Guards
+```
+ng g guard guards/auth
+```
+
+## Interceptor
+```
+ng g interceptor interceptor
+```

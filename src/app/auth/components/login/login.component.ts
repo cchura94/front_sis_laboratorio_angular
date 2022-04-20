@@ -25,6 +25,12 @@ export class LoginComponent implements OnInit {
         console.log(res);
         localStorage.setItem("token", res.accessToken)
 
+        this.loginService.getPerfil().subscribe(
+          (res: any) => {
+            console.log(res);
+          }
+        )
+        alert("Bienvenido")
       },
       (error: any) => {
         console.log(error);
