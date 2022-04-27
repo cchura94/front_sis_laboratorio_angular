@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginService } from './services/login.service';
+import { PersonaService } from './services/persona.service';
 
 
 
@@ -10,7 +11,8 @@ import { LoginService } from './services/login.service';
     CommonModule
   ],
   providers: [
-    LoginService
+    LoginService,
+    PersonaService
   ]
 })
 export class CoreModule { }

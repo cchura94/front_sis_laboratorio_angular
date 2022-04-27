@@ -1,0 +1,28 @@
+<h1>Personasssss</h1>
+
+<p-table [value]="lista_personas" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>CI / DNI</th>
+            <th>TELEFONO</th>
+            <th>CIUDAD</th>
+            <th>CUENTA</th>
+            <th>ACCIONES</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-persona>
+        <tr>
+            <td>{{persona.nombres}}</td>
+            <td>{{persona.apellidos}}</td>
+            <td>{{persona.ci_dni}}</td>
+            <td>{{persona.telefono}}</td>
+            <td>{{persona.ciudad}}</td>
+            <td>{{persona.cuenta}}</td>
+            <td>
+
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

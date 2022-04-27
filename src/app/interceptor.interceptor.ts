@@ -24,9 +24,11 @@ export class InterceptorInterceptor implements HttpInterceptor {
       }
     });
 
-    return next.handle(tokenizedReq).pipe(tap(() => {
+    return next.handle(tokenizedReq).pipe(tap(() => {},
       (error: any) => {
+        console.log('ERROR::::::::::::: ', error)
         if(error instanceof HttpErrorResponse){
+          console.log(error.status)
           if(error.status !== 401){
             return;
           }
@@ -34,6 +36,6 @@ export class InterceptorInterceptor implements HttpInterceptor {
           this.router.navigate(["/auth/login"]);
         }
       }
-    }));
+    ));
   }
 }
