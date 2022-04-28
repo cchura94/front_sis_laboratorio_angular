@@ -7,6 +7,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorInterceptor } from '../interceptor.interceptor';
 import { CoreModule } from '../core/core.module';
 import { PrimengModule } from '../primeng/primeng.module'
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { PrimengModule } from '../primeng/primeng.module'
     CommonModule,
     AdminRoutingModule,
     CoreModule,
-    PrimengModule
+    PrimengModule,
+    ReactiveFormsModule,
   ],
   providers: [
     {

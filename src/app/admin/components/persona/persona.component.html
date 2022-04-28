@@ -1,5 +1,67 @@
 <h1>Personasssss</h1>
 
+
+<p-dialog header="Nueva Persona" [(visible)]="display" [style]="{width: '50vw'}">
+
+    <form [formGroup]="personaForm">
+    <h5>Ingrese Nombres</h5>
+    <span class="p-float-label">
+        <input id="float-nom" type="text" class="ng-invalid ng-dirty" pInputText formControlName="nombres">
+        <label for="float-nom">Nombres</label>
+        <small id="username2-help" class="p-error block">Nombre es requerido.</small>
+    </span>
+
+    <h5>Ingrese Apellidos</h5>
+    <span class="p-float-label">
+        <input id="float-ape" type="text" pInputText formControlName="apellidos">
+        <label for="float-ape">apellidos</label>
+    </span>
+
+    <h5>Ingrese Ci / DNI</h5>
+    <span class="p-float-label">
+        <input id="float-ci_dni" type="text" pInputText formControlName="ci_dni">
+        <label for="float-ci_dni">ci_dni</label>
+    </span>
+    
+    <h5>telefono</h5>
+    <span class="p-float-label">
+        <input id="float-tel" type="text" pInputText formControlName="telefono">
+        <label for="float-tel">telefono</label>
+    </span>
+    <h5>Fecha Nacimiento</h5>
+    <span class="p-float-label">
+        <input id="float-fn" type="text" pInputText formControlName="fecha_nacimiento">
+        <label for="float-fn">fecha_nacimiento</label>
+    </span>
+
+    <h5>Dirección</h5>
+    <span class="p-float-label">
+        <input id="float-cdireccion" type="text" pInputText formControlName="direccion">
+        <label for="float-direccion">direccion</label>
+    </span>
+
+    <h5>Ciudad</h5>
+    <span class="p-float-label">
+        <input id="float-ciudad" type="text" pInputText formControlName="ciudad">
+        <label for="float-ciudad">ciudad</label>
+    </span>
+
+    <h5>Pais</h5>
+    <span class="p-float-label">
+        <input id="float-pais" type="text" pInputText formControlName="pais">
+        <label for="float-pais">pais</label>
+    </span>
+
+</form>
+
+<p-button type="button" (click)="guardarNuevoPaciente()" icon="pi pi-info-circle" label="Guadar Paciente"></p-button>
+
+{{ personaForm.value | json }}
+</p-dialog>
+
+<p-button type="button" (click)="showDialogNuevoPaciente()" icon="pi pi-info-circle" label="Nuevo Paciente"></p-button>
+
+
 <p-table [value]="lista_personas" responsiveLayout="scroll">
     <ng-template pTemplate="header">
         <tr>
@@ -21,7 +83,7 @@
             <td>{{persona.ciudad}}</td>
             <td>{{persona.cuenta}}</td>
             <td>
-
+                <p-button (click)="showDialogNuevoPaciente(persona)">editar</p-button>
             </td>
         </tr>
     </ng-template>
