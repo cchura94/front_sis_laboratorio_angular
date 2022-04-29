@@ -8,10 +8,12 @@ import { InterceptorInterceptor } from '../interceptor.interceptor';
 import { CoreModule } from '../core/core.module';
 import { PrimengModule } from '../primeng/primeng.module'
 import { ReactiveFormsModule } from '@angular/forms';
+import { ConsultaComponent } from './components/consulta/consulta.component';
 
 @NgModule({
   declarations: [
-    PersonaComponent
+    PersonaComponent,
+    ConsultaComponent
   ],
   imports: [
     CommonModule,

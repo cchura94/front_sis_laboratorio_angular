@@ -39,6 +39,12 @@ export class AppMenuComponent implements OnInit {
                     {label: 'Personas', icon: 'pi pi-fw pi-table', routerLink: ['/admin/persona']},
                 ]
             },
+            {
+                label: 'Consultas Médicas',
+                items: [
+                    {label: 'Consultas', icon: 'pi pi-fw pi-table', routerLink: ['/admin/consultas']},
+                ]
+            },
             /*{label:'Utilities',
                 items:[
                     {label: 'PrimeIcons', icon: 'pi pi-fw pi-prime', routerLink: ['/icons']},

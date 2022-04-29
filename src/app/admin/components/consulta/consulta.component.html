@@ -1,0 +1,58 @@
+<div class="card">
+    <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="Nueva Consulta" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNuevaConsulta()"></button>
+            <button pButton pRipple [label]="Eliminar" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedProducts || !selectedProducts.length"></button>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 inline-block"></p-fileUpload>
+            <button pButton pRipple label="Exportar" icon="pi pi-upload" class="p-button-help"></button>
+        </ng-template>
+    </p-toolbar>
+    <pre>
+        <code>
+            {{ consultas | json }}
+
+        </code>
+    </pre>
+
+</div>
+
+
+<p-dialog [(visible)]="consultaDialog" [style]="{width: '450px'}" header="Consulta" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="field">
+            <label for="pac">Paciente</label>
+            <input type="text" pInputText id="pac" [(ngModel)]="consulta.paciente_id" required autofocus />
+            <small class="p-error" *ngIf="submitted && consulta.paciente_id!=0 && !consulta.paciente_id">El Paciente es Obligatorio.</small>
+        </div>
+        <div class="field">
+            <label for="pro">Profesional</label>
+            <input type="text" pInputText id="pro" [(ngModel)]="consulta.profesional_id" required autofocus />
+            <small class="p-error" *ngIf="submitted && consulta.profesional_id!=0 && !consulta.profesional_id">El Profesional es Obligatorio.</small>
+        </div>
+        <div class="field">
+            <label for="suc">Sucursal</label>
+            <input type="text" pInputText id="suc" [(ngModel)]="consulta.sucursal_id" required autofocus />
+            <small class="p-error" *ngIf="submitted && consulta.sucursal_id!=0 && !consulta.sucursal_id">La Sucursal es Obligatorio.</small>
+        </div>
+
+        <!--div class="formgrid grid">
+            <div class="field col">
+                <label for="price">Price</label>
+                <p-inputNumber id="price" [(ngModel)]="product.price" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
+            </div>
+            <div class="field col">
+                <label for="quantity">Quantity</label>
+                <p-inputNumber id="quantity" [(ngModel)]="product.quantity"></p-inputNumber>
+            </div>
+        </div-->
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="guardarConsulta()"></button>
+    </ng-template>
+    {{ consulta | json }}
+</p-dialog>
