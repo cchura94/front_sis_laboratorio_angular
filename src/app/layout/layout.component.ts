@@ -7,9 +7,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutComponent implements OnInit {
 
+  items: any[];
   constructor() { }
 
   ngOnInit(): void {
+    this.items = [
+      {
+          label: 'INICIO',
+          icon: 'pi pi-fw pi-home',
+          routerLink: '/'
+          
+      },
+      {
+          label: 'Ingresar',
+          icon: 'pi pi-fw pi-pencil',
+          routerLink: '/auth/login'
+      }
+  ];
   }
 
 }

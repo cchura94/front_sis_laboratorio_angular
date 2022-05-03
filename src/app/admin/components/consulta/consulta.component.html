@@ -10,6 +10,55 @@
             <button pButton pRipple label="Exportar" icon="pi pi-upload" class="p-button-help"></button>
         </ng-template>
     </p-toolbar>
+
+    <p-table #dt [value]="consultas" [lazy]="true" (onLazyLoad)="loadConsultas($event)" [rows]="2" [paginator]="true" [totalRecords]="totalRecords" [loading]="loading" [globalFilterFields]="['paciente.nombres','profesional.nombres','sucursal.nombre','fecha_consulta']" responsiveLayout="scroll"
+    [(selection)]="selectedConsultas" [rowHover]="true" dataKey="id"
+    currentPageReportTemplate="Mostramdo {first} a {last} de {totalRecords} consultas" [showCurrentPageReport]="true">
+    <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+            <h5 class="m-0">Gestionar Consultas</h5>
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Buscar..." />
+            </span>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width: 3rem">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th pSortableColumn="paciente">Paciente <p-sortIcon field="name"></p-sortIcon></th>
+           <th pSortableColumn="profesional">Profesional <p-sortIcon field="profesional"></p-sortIcon></th>
+            <th pSortableColumn="category">Sucursal <p-sortIcon field="sucursal"></p-sortIcon></th>
+            <th pSortableColumn="fecha_consulta">Fecha Consulta <p-sortIcon field="date"></p-sortIcon></th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-consulta>
+        <tr>
+            <td>
+                <p-tableCheckbox [value]="product"></p-tableCheckbox>
+            </td>
+            <td>{{ consulta.paciente.nombres}} {{consulta.paciente.apellidos}} </td>
+            
+            <td>{{consulta.profesional.nombres }} {{consulta.profesional.apellidos }}</td>
+            <td>{{consulta.sucursal.nombre}}</td>
+            <td>
+                {{consulta.fecha_consulta}}
+            </td>
+            <td>
+                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(product)"></button>
+                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(product)"></button>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <div class="flex align-items-center justify-content-between">
+            En total son {{consultas ? consultas.length : 0 }} consultas.
+        </div>
+    </ng-template>
+</p-table>
     <pre>
         <code>
             {{ consultas | json }}

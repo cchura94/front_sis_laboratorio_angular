@@ -13,8 +13,8 @@ export class ConsultaService {
 
   constructor(private http: HttpClient) { }
 
-  listar(){
-    return this.http.get(`${this.urlBase}/consulta`);
+  listar(page=1, limit=10){
+    return this.http.get(`${this.urlBase}/consulta?page=${page}&limit=${limit}`);
   }
 
   guardar(datos){

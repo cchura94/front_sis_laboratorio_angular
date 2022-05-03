@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { CoreModule } from './../core/core.module'
 import { InterceptorInterceptor } from '../interceptor.interceptor';
+import { PrimengModule } from '../primeng/primeng.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { InterceptorInterceptor } from '../interceptor.interceptor';
     AuthRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    CoreModule
+    CoreModule,
+    PrimengModule
   ],
   providers: [
     {

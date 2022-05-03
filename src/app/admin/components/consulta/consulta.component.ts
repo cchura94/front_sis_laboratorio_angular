@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ConsultaService } from 'src/app/core/services/consulta.service';
+import { LazyLoadEvent } from 'primeng/api';
 
 interface Consulta {
   paciente_id: Number;
@@ -24,9 +25,12 @@ export class ConsultaComponent implements OnInit {
 
     selectedConsultas: Consulta[];
 
+    totalRecords: number;
+
     submitted: boolean;
 
     statuses: any[];
+    loading: boolean;
 
   constructor( private consultaService: ConsultaService) { }
 
@@ -74,6 +78,32 @@ guardarConsulta() {
         this.consultaDialog = false;
         // this.consulta = {};
     }
+}
+
+loadConsultas(event: LazyLoadEvent) {
+  this.loading = true;
+
+  console.log("****: ", event.first/event.rows)
+  let page = (event.first/event.rows) + 1
+
+  this.consultaService.listar(page, event.rows).subscribe(
+    (res: any) => {
+      console.log(res);
+      this.consultas = res.data
+      this.totalRecords = res.total
+      this.loading = false;
+    }
+  );
+
+  /*
+  setTimeout(() => {
+      this.customerService.getCustomers({lazyEvent: JSON.stringify(event)}).then(res => {
+          this.customers = res.customers;
+          this.totalRecords = res.totalRecords;
+          this.loading = false;
+      })
+  }, 1000);
+  */
 }
 
 
