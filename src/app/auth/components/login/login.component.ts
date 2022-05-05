@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LoginService } from 'src/app/core/services/login.service';
 import { AppConfig } from 'src/app/layout-admin/api/appconfig';
@@ -43,7 +44,11 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', Validators.required)
   });
 
-  constructor(private loginService: LoginService, public configService: ConfigService) { }
+  constructor(
+    private loginService: LoginService,
+    public configService: ConfigService,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
     this.config = this.configService.config;
@@ -63,7 +68,8 @@ export class LoginComponent implements OnInit {
             console.log(res);
           }
         )
-        alert("Bienvenido")
+        this.router.navigate(["/admin"])
+        
       },
       (error: any) => {
         console.log(error);

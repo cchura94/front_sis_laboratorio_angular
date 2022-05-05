@@ -17,17 +17,22 @@ interface Consulta {
 })
 export class ConsultaComponent implements OnInit {
 
+    uploadedFiles: any[] = [];
     consultaDialog: boolean;
+    archivoDialog: boolean;
 
     consultas: Consulta[];
 
     consulta: Consulta;
+    documento: any;
+    consul: any;
 
     selectedConsultas: Consulta[];
 
     totalRecords: number;
 
     submitted: boolean;
+    submitted2: boolean;
 
     statuses: any[];
     loading: boolean;
@@ -48,6 +53,21 @@ export class ConsultaComponent implements OnInit {
         this.submitted = false;
         this.consultaDialog = true;
   }
+
+  openRegistroArchivo(con: any){
+    this.documento = {tipoexamen_id: 1, detalle: ""};
+    this.submitted2 = false;
+    this.archivoDialog = true;
+    this.consul = con
+}
+
+onUpload(event) {
+  for(let file of event.files) {
+      this.uploadedFiles.push(file);
+  }
+
+  // this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
+}
 
   hideDialog() {
     this.consultaDialog = false;
@@ -78,6 +98,29 @@ guardarConsulta() {
         this.consultaDialog = false;
         // this.consulta = {};
     }
+}
+
+guardarArchivo(){
+  console.log(this.uploadedFiles.length)
+  let formD = new FormData;
+  formD.append("tipoexamen_id", this.documento.tipoexamen_id);
+  formD.append("detalle", this.documento.detalle);
+  formD.append("archivo", this.uploadedFiles[0]); 
+
+  this.consultaService.subirArchivo(formD, this.consul.id).subscribe(
+    (res: any) => {
+      console.log(res);
+    },
+    (error: any) => {
+      console.log(error)
+    }
+  )
+}
+
+onBeforeUploadListener(event, uploader:any){
+// your have acces to files :
+console.log(uploader.files)
+this.uploadedFiles = uploader.files
 }
 
 loadConsultas(event: LazyLoadEvent) {

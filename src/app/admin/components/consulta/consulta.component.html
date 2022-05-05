@@ -32,6 +32,7 @@
            <th pSortableColumn="profesional">Profesional <p-sortIcon field="profesional"></p-sortIcon></th>
             <th pSortableColumn="category">Sucursal <p-sortIcon field="sucursal"></p-sortIcon></th>
             <th pSortableColumn="fecha_consulta">Fecha Consulta <p-sortIcon field="date"></p-sortIcon></th>
+            <th>Archivos</th>
             <th></th>
         </tr>
     </ng-template>
@@ -46,6 +47,9 @@
             <td>{{consulta.sucursal.nombre}}</td>
             <td>
                 {{consulta.fecha_consulta}}
+            </td>
+            <td>
+                <button pButton pRipple icon="pi pi-file" class="p-button-rounded p-button-info mr-2" (click)="openRegistroArchivo(consulta)"></button>
             </td>
             <td>
                 <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(product)"></button>
@@ -87,16 +91,6 @@
             <small class="p-error" *ngIf="submitted && consulta.sucursal_id!=0 && !consulta.sucursal_id">La Sucursal es Obligatorio.</small>
         </div>
 
-        <!--div class="formgrid grid">
-            <div class="field col">
-                <label for="price">Price</label>
-                <p-inputNumber id="price" [(ngModel)]="product.price" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
-            </div>
-            <div class="field col">
-                <label for="quantity">Quantity</label>
-                <p-inputNumber id="quantity" [(ngModel)]="product.quantity"></p-inputNumber>
-            </div>
-        </div-->
     </ng-template>
 
     <ng-template pTemplate="footer">
@@ -104,4 +98,45 @@
         <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="guardarConsulta()"></button>
     </ng-template>
     {{ consulta | json }}
+</p-dialog>
+
+
+<p-dialog [(visible)]="archivoDialog" [style]="{width: '450px'}" header="Registro Archivo - Examen Medico" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        
+        <div class="field">
+            <label for="ex">Seleccionar Tipo Examen</label>
+            <input type="text" pInputText id="ex" [(ngModel)]="documento.tipoexamen_id" required autofocus />
+            <small class="p-error" *ngIf="submitted && documento.tipoexamen_id">El Tipo Examen es Obligatorio.</small>
+        </div>
+        <div class="field">
+            <label for="det">Detalles (observaciones)</label>
+            <input type="text" pInputText id="det" [(ngModel)]="documento.detalle" autofocus />
+        </div>
+        <div class="field">
+            <label for="suc">Archivo</label>
+
+            <!--p-fileUpload name="archivos[]" url="./upload.php" (onUpload)="onUpload($event)"
+                    multiple="multiple" accept="image/*" maxFileSize="1000000">
+                    <ng-template pTemplate="content">
+                        <ul *ngIf="uploadedFiles.length">
+                            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                        </ul>
+                    </ng-template>
+            </p-fileUpload-->
+
+            <p-fileUpload #uploader (onBeforeUpload)="onBeforeUploadListener($event, uploader)">
+            </p-fileUpload>
+
+            <!--small class="p-error" *ngIf="submitted && documento.sucursal_id!=0 && !consulta.sucursal_id">La Sucursal es Obligatorio.</small-->
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="guardarArchivo()"></button>
+    </ng-template>
+    {{ documento | json }}
+
+
 </p-dialog>

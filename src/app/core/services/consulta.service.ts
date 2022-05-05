@@ -24,4 +24,8 @@ export class ConsultaService {
   modificar(datos, id){
     return this.http.put(`${this.urlBase}/consulta/${id}`, datos)
   }
+
+  subirArchivo(datos, id){
+    return this.http.post(`${this.urlBase}/consulta/${id}/asignar-tipo-examen`, datos)
+  }
 }
