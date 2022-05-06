@@ -1,0 +1,64 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <h5>Fecha y Hora de Consulta:</h5>
+            {{ consulta.fecha_consulta }}
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card">
+            <h5>Datos Paciente</h5>
+             <p><strong>Nombres</strong>: {{ consulta.paciente.nombres }}</p>
+             <p><strong>Apellidos</strong>:{{ consulta.paciente.apellidos }}</p>
+             <p><strong>direccion</strong>:{{ consulta.paciente.direccion }}</p>
+             <p><strong>CI/NIT</strong>:{{ consulta.paciente.ci_dni }}</p>
+            <p><strong>Telefono</strong>: {{ consulta.paciente.telefono }}</p>
+             <p><strong>fecha_nacimiento</strong>:{{ consulta.paciente.fecha_nacimiento }}</p>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card">
+            <h5>Datos Profesional</h5>
+            <p><strong>Nombres</strong>: {{ consulta.profesional.nombres }}</p>
+             <p><strong>Apellidos</strong>:{{ consulta.profesional.apellidos }}</p>
+             <p><strong>direccion</strong>:{{ consulta.profesional.direccion }}</p>
+             <p><strong>CI/NIT</strong>:{{ consulta.profesional.ci_dni }}</p>
+            <p><strong>Telefono</strong>: {{ consulta.profesional.telefono }}</p>
+             <p><strong>fecha_nacimiento</strong>:{{ consulta.profesional.fecha_nacimiento }}</p>
+        
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card">
+            <h5>Datos Sucursal</h5>
+            <strong>Nombre Sucursal</strong>: <p>{{ consulta.sucursal.nombre }}</p>
+            <strong>Telefono</strong>: <p>{{ consulta.sucursal.telefono }}</p>
+            <strong>Dirección</strong>: <p>{{ consulta.sucursal.direccion }}</p>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="card">
+            <h5>Documentos de Examenes</h5>
+            <p-table [value]="consulta.tipoexamenes" responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>EXAMEN</th>
+                        <th>FECHA EXAMEN</th>
+                        <th>ARCHIVO</th>
+                        <th>DETALLES</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-consulta>
+                    <tr>
+                        <td>{{ consulta.examen }}</td>
+                        <td>{{ consulta.created_at }}</td>
+                        <td>
+                            <a href="http://localhost:8000/{{ consulta.pivot.archivo }}" target="_blank">{{ consulta.pivot.archivo }}</a>
+                        </td>
+                        <td>{{ consulta.pivot.detalle }}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>

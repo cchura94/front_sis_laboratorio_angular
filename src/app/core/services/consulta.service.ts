@@ -21,6 +21,10 @@ export class ConsultaService {
     return this.http.post(`${this.urlBase}/consulta`, datos)
   }
 
+  mostrar(id){
+    return this.http.get(`${this.urlBase}/consulta/${id}`)
+  }
+
   modificar(datos, id){
     return this.http.put(`${this.urlBase}/consulta/${id}`, datos)
   }
