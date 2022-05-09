@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  servidor: 'https://sis-labo.herokuapp.com/api'
 };

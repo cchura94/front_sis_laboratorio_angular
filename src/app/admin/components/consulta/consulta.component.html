@@ -78,12 +78,14 @@
     <ng-template pTemplate="content">
         <div class="field">
             <label for="pac">Paciente</label>
-            <input type="text" pInputText id="pac" [(ngModel)]="consulta.paciente_id" required autofocus />
+            <p-autoComplete [(ngModel)]="consulta.paciente_id" [showEmptyMessage]="true" [suggestions]="filteredPacientes" (completeMethod)="buscarPacientes($event)" field="nombres" [minLength]="1" [dropdown]="true"></p-autoComplete>
+
+
             <small class="p-error" *ngIf="submitted && consulta.paciente_id!=0 && !consulta.paciente_id">El Paciente es Obligatorio.</small>
         </div>
         <div class="field">
             <label for="pro">Profesional</label>
-            <input type="text" pInputText id="pro" [(ngModel)]="consulta.profesional_id" required autofocus />
+            <p-autoComplete [(ngModel)]="consulta.profesional_id" [showEmptyMessage]="true" [suggestions]="filteredPacientes" (completeMethod)="buscarPacientes($event)" field="nombres" [minLength]="1" [dropdown]="true"></p-autoComplete>
             <small class="p-error" *ngIf="submitted && consulta.profesional_id!=0 && !consulta.profesional_id">El Profesional es Obligatorio.</small>
         </div>
         <div class="field">
@@ -98,7 +100,6 @@
         <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
         <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="guardarConsulta()"></button>
     </ng-template>
-    {{ consulta | json }}
 </p-dialog>
 
 
@@ -107,7 +108,8 @@
         
         <div class="field">
             <label for="ex">Seleccionar Tipo Examen</label>
-            <input type="text" pInputText id="ex" [(ngModel)]="documento.tipoexamen_id" required autofocus />
+            <p-autoComplete [(ngModel)]="documento.tipoexamen_id" [showEmptyMessage]="true" [suggestions]="filteredTipoExamenes" (completeMethod)="buscarTipoExamenes($event)" field="examen" [minLength]="1" [dropdown]="true"></p-autoComplete>
+
             <small class="p-error" *ngIf="submitted && documento.tipoexamen_id">El Tipo Examen es Obligatorio.</small>
         </div>
         <div class="field">
@@ -137,7 +139,6 @@
         <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
         <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="guardarArchivo()"></button>
     </ng-template>
-    {{ documento | json }}
 
 
 </p-dialog>

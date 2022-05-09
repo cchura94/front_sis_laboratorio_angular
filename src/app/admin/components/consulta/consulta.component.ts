@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ConsultaService } from 'src/app/core/services/consulta.service';
 import { LazyLoadEvent } from 'primeng/api';
+import { TipoexamenService } from 'src/app/core/services/tipoexamen.service';
 
 interface Consulta {
-  paciente_id: Number;
-  profesional_id: Number;
+  paciente_id: any;
+  profesional_id: any;
   sucursal_id: Number;
   fecha_consulta?: String;
   id?: Number;
@@ -37,7 +38,10 @@ export class ConsultaComponent implements OnInit {
     statuses: any[];
     loading: boolean;
 
-  constructor( private consultaService: ConsultaService) { }
+    filteredPacientes: any[]
+    filteredTipoExamenes: any[];
+
+  constructor( private consultaService: ConsultaService, private tipoExamenService: TipoexamenService) { }
 
   ngOnInit(): void {
     this.consultaService.listar().subscribe(
@@ -83,6 +87,8 @@ guardarConsulta() {
             // this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Updated', life: 3000});
         }
         else {
+          this.consulta.paciente_id = this.consulta.paciente_id.id;
+          this.consulta.profesional_id = this.consulta.profesional_id.id;
           this.consultaService.guardar(this.consulta).subscribe(
             (res: any) => {
               console.log(res);
@@ -103,7 +109,7 @@ guardarConsulta() {
 guardarArchivo(){
   console.log(this.uploadedFiles.length)
   let formD = new FormData;
-  formD.append("tipoexamen_id", this.documento.tipoexamen_id);
+  formD.append("tipoexamen_id", this.documento.tipoexamen_id.id);
   formD.append("detalle", this.documento.detalle);
   formD.append("archivo", this.uploadedFiles[0]); 
 
@@ -149,5 +155,29 @@ loadConsultas(event: LazyLoadEvent) {
   */
 }
 
+buscarPacientes(event) {
+  
+  let query = event.query;
 
+  this.consultaService.buscar(query).subscribe(
+    (res: any) => {
+
+      this.filteredPacientes = res;
+    }
+  )
+
+
+}
+
+buscarTipoExamenes(event){
+  let query = event.query;
+
+  this.tipoExamenService.listar().subscribe(
+    (res: any) => {
+
+      this.filteredTipoExamenes = res;
+    }
+  )
+
+}
 }

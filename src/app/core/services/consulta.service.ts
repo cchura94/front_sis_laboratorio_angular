@@ -17,6 +17,10 @@ export class ConsultaService {
     return this.http.get(`${this.urlBase}/consulta?page=${page}&limit=${limit}`);
   }
 
+  buscar(q){
+    return this.http.get(`${this.urlBase}/persona/buscar-pacientes?q=${q}`);
+  }
+
   guardar(datos){
     return this.http.post(`${this.urlBase}/consulta`, datos)
   }

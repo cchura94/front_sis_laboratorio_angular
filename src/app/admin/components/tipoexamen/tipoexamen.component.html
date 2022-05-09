@@ -1,0 +1,81 @@
+<div class="card">
+    <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="Nuevo Tipo Examen" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNuevaTipoexamen()"></button>
+            <button pButton pRipple [label]="Eliminar" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedProducts || !selectedProducts.length"></button>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 inline-block"></p-fileUpload>
+            <button pButton pRipple label="Exportar" icon="pi pi-upload" class="p-button-help"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [value]="tipoexamenes" [lazy]="false" [rows]="5" [paginator]="false" responsiveLayout="scroll"
+    [(selection)]="selectedTipoexamenes" [rowHover]="true" dataKey="id"
+    currentPageReportTemplate="Mostramdo {first} a {last} de {totalRecords} tipoexamenes" [showCurrentPageReport]="true">
+    <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+            <h5 class="m-0">Gestionar Tipo Examen</h5>
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Buscar..." />
+            </span>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width: 3rem">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th pSortableColumn="id">ID <p-sortIcon field="id"></p-sortIcon></th>
+           <th pSortableColumn="examen">Examen <p-sortIcon field="examen"></p-sortIcon></th>
+            <th pSortableColumn="precio">Precio <p-sortIcon field="precio"></p-sortIcon></th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-tc>
+        <tr>
+            <td>
+                <p-tableCheckbox [value]="tc"></p-tableCheckbox>
+            </td>
+            <td>{{ tc.id}} </td>
+            
+            <td>{{tc.examen}}</td>
+            <td>{{tc.precio}}</td>
+            <td>
+                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(product)"></button>
+                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(product)"></button>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <div class="flex align-items-center justify-content-between">
+            En total son {{tipoexamenes ? tipoexamenes.length : 0 }} tipoexamenes.
+        </div>
+    </ng-template>
+</p-table>
+
+</div>
+
+
+<p-dialog [(visible)]="tipoexamenDialog" [style]="{width: '450px'}" header="Consulta" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="field">
+            <label for="pac">Nombre Examen</label>
+            <input type="text" pInputText id="pac" [(ngModel)]="tipoexamen.examen" required autofocus />
+            <small class="p-error" *ngIf="submitted && tipoexamen.examen">El Examen es Obligatorio.</small>
+        </div>
+        <div class="field">
+            <label for="pro">Precio</label>
+            <input type="text" pInputText id="pro" [(ngModel)]="tipoexamen.precio" required autofocus />
+            <small class="p-error" *ngIf="submitted && tipoexamen.precio">El Precio es Obligatorio.</small>
+        </div>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="guardarTipoExamen()"></button>
+    </ng-template>
+</p-dialog>

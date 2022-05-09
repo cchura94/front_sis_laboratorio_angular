@@ -43,6 +43,7 @@ export class AppMenuComponent implements OnInit {
                 label: 'Consultas Médicas',
                 items: [
                     {label: 'Consultas', icon: 'pi pi-fw pi-table', routerLink: ['/admin/consultas']},
+                    {label: 'Tipos Examen', icon: 'pi pi-fw pi-table', routerLink: ['/admin/tipo-examenes']},
                 ]
             },
             /*{label:'Utilities',

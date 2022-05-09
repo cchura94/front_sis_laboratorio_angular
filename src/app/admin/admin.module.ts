@@ -10,12 +10,14 @@ import { PrimengModule } from '../primeng/primeng.module'
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConsultaComponent } from './components/consulta/consulta.component';
 import { ConsultaMostrarComponent } from './components/consulta-mostrar/consulta-mostrar.component';
+import { TipoexamenComponent } from './components/tipoexamen/tipoexamen.component';
 
 @NgModule({
   declarations: [
     PersonaComponent,
     ConsultaComponent,
-    ConsultaMostrarComponent
+    ConsultaMostrarComponent,
+    TipoexamenComponent
   ],
   imports: [
     CommonModule,
